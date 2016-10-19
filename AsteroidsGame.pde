@@ -1,15 +1,16 @@
-//your variable declarations here
+SpaceShip shuu = new SpaceShip();
 public void setup() 
 {
-  //your code here
+  size(500,500);
+  background(0);
 }
 public void draw() 
 {
-  //your code here
+  shuu.show();
 }
-class SpaceShip //extends Floater  
-{   
-    //your code here
+public void keyPressed(){
+      if(key == )
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -87,4 +88,39 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-
+class SpaceShip extends Floater  
+{
+  SpaceShip(){
+    corners = 6;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = 7;
+    yCorners[0] = 0;
+    xCorners[1] = 0;
+    yCorners[1] = -7;
+    xCorners[2] = -2;
+    yCorners[2] = -2;
+    xCorners[3] = -7;
+    yCorners[3] = 0;
+    xCorners[4] = -2;
+    yCorners[4] = 2;
+    xCorners[5] = 0;
+    yCorners[5] = 7;
+    myColor = color(255, 255, 255);
+    myCenterX = 250;
+    myCenterY = 250;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+  }
+    public void setX(int x){myCenterX = x;}
+    public int getX(){return (int)myCenterX;}
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}
+    public void setPointDirection(int degrees){myPointDirection = degrees;}
+    public double getPointDirection(){return myPointDirection;}
+}
