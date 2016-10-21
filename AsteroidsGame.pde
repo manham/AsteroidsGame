@@ -2,15 +2,22 @@ SpaceShip shuu = new SpaceShip();
 public void setup() 
 {
   size(500,500);
-  background(0);
+
 }
 public void draw() 
-{
+{ 
+  background(0);
   shuu.show();
 }
-public void keyPressed(){
-      if(key == )
-
+public void keyPressed()
+{
+  if(key == 'z' || key == 'Z')
+  {
+    shuu.setDirectionX(0);
+    shuu.setDirectionY(0);
+    shuu.setX((int)(Math.random()*501));
+    shuu.setY((int)(Math.random()*501));
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -94,18 +101,18 @@ class SpaceShip extends Floater
     corners = 6;
     xCorners = new int[corners];
     yCorners = new int[corners];
-    xCorners[0] = 7;
+    xCorners[0] = 12;
     yCorners[0] = 0;
     xCorners[1] = 0;
-    yCorners[1] = -7;
-    xCorners[2] = -2;
-    yCorners[2] = -2;
-    xCorners[3] = -7;
+    yCorners[1] = -12;
+    xCorners[2] = -3;
+    yCorners[2] = -3;
+    xCorners[3] = -12;
     yCorners[3] = 0;
-    xCorners[4] = -2;
-    yCorners[4] = 2;
+    xCorners[4] = -3;
+    yCorners[4] = 3;
     xCorners[5] = 0;
-    yCorners[5] = 7;
+    yCorners[5] = 12;
     myColor = color(255, 255, 255);
     myCenterX = 250;
     myCenterY = 250;
