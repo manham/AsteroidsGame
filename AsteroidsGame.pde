@@ -1,13 +1,20 @@
 SpaceShip shuu = new SpaceShip();
+Star[] spacesky = new Star[200];
 public void setup() 
 {
   size(500,500);
-
+  for(int i = 0; i < spacesky.length; i = i + 1){
+    spacesky[i] = new Star();
+  }
 }
 public void draw() 
 { 
   background(0);
+  for(int i = 0; i < spacesky.length; i = i + 1){
+    spacesky[i].show();
+  }
   shuu.show();
+  shuu.move();
 }
 public void keyPressed()
 {
@@ -17,6 +24,21 @@ public void keyPressed()
     shuu.setDirectionY(0);
     shuu.setX((int)(Math.random()*501));
     shuu.setY((int)(Math.random()*501));
+  }
+  if(key == CODED)
+  {
+    if(keyCode == UP)
+    {
+      shuu.accelerate(1);
+    }
+    else if(keyCode == LEFT)
+    {
+      shuu.rotate(-1);
+    }
+    else if(keyCode == RIGHT)
+    {
+      shuu.rotate(1);
+    }
   }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
@@ -130,4 +152,16 @@ class SpaceShip extends Floater
     public double getDirectionY(){return myDirectionY;}
     public void setPointDirection(int degrees){myPointDirection = degrees;}
     public double getPointDirection(){return myPointDirection;}
+}
+class Star
+{
+  private int myX, myY;
+  Star(){
+    myX = (int)(Math.random()*501);
+    myY = (int)(Math.random()*501);
+  }
+  public void show(){
+    fill(255, 255, 0);
+    ellipse(myX, myY, 2, 2);
+  }
 }
