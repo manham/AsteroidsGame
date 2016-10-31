@@ -1,5 +1,6 @@
 SpaceShip shuu = new SpaceShip();
 Star[] spacesky = new Star[200];
+Asteroid exp = new Asteroid();
 public void setup() 
 {
   size(500,500);
@@ -15,7 +16,10 @@ public void draw()
   }
   shuu.show();
   shuu.move();
+  exp.show();
 }
+
+
 public void keyPressed()
 {
   if(key == 'z' || key == 'Z')
@@ -120,7 +124,6 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 } 
 class SpaceShip extends Floater  
 {
-  private int rotationSpeed;
   SpaceShip(){
     corners = 6;
     xCorners = new int[corners];
@@ -157,6 +160,7 @@ class SpaceShip extends Floater
 }
 class Asteroid extends Floater
 {
+  private int rotationSpeed;
   Asteroid(){
     corners = 11;
     xCorners = new int[corners];
@@ -189,6 +193,7 @@ class Asteroid extends Floater
     myDirectionX = 0;
     myDirectionY = 0;
     myPointDirection = 0;
+    rotationSpeed = (int)(Math.random()*721) - 360;
   }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
