@@ -24,6 +24,7 @@ public void keyPressed()
     shuu.setDirectionY(0);
     shuu.setX((int)(Math.random()*501));
     shuu.setY((int)(Math.random()*501));
+    shuu.setPointDirection((int)(Math.random()*361));
   }
   if(key == CODED)
   {
@@ -119,6 +120,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 } 
 class SpaceShip extends Floater  
 {
+  private int rotationSpeed;
   SpaceShip(){
     corners = 6;
     xCorners = new int[corners];
@@ -138,6 +140,52 @@ class SpaceShip extends Floater
     myColor = color(255, 255, 255);
     myCenterX = 250;
     myCenterY = 250;
+    myDirectionX = 0;
+    myDirectionY = 0;
+    myPointDirection = 0;
+  }
+    public void setX(int x){myCenterX = x;}
+    public int getX(){return (int)myCenterX;}
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}
+    public double getDirectionX(){return myDirectionX;}
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}
+    public void setPointDirection(int degrees){myPointDirection = degrees;}
+    public double getPointDirection(){return myPointDirection;}
+}
+class Asteroid extends Floater
+{
+  Asteroid(){
+    corners = 11;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = 0;
+    yCorners[0] = -9;
+    xCorners[1] = 4;
+    yCorners[1] = -8;
+    xCorners[2] = 7;
+    yCorners[2] = -4;
+    xCorners[3] = 9;
+    yCorners[3] = 0;
+    xCorners[4] = 5;
+    yCorners[4] = 5;
+    xCorners[5] = 1;
+    yCorners[5] = 6;
+    xCorners[6] = -5;
+    yCorners[6] = 5;
+    xCorners[7] = -6;
+    yCorners[7] = 2;
+    xCorners[8] = -8;
+    yCorners[8] = -1;
+    xCorners[9] = -6;
+    yCorners[9] = -6;
+    xCorners[10] = -3;
+    yCorners[10] = -6;
+    myColor = color(190, 190, 190);
+    myCenterX = (int)(Math.random()*501);
+    myCenterY = (int)(Math.random()*501);
     myDirectionX = 0;
     myDirectionY = 0;
     myPointDirection = 0;
