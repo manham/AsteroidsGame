@@ -1,11 +1,14 @@
 SpaceShip shuu = new SpaceShip();
 Star[] spacesky = new Star[200];
-Asteroid exp = new Asteroid();
+Asteroid[] comets = new Asteroid[10];
 public void setup() 
 {
   size(500,500);
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i] = new Star();
+  }
+  for(int i = 0; i < comets.length; i = i + 1){
+    comets[i] = new Asteroid();
   }
 }
 public void draw() 
@@ -14,9 +17,12 @@ public void draw()
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i].show();
   }
+  for(int i = 0; i < comets.length; i = i + 1){
+    comets[i].show();
+    comets[i].move();
+  }
   shuu.show();
   shuu.move();
-  exp.show();
 }
 
 
@@ -190,10 +196,10 @@ class Asteroid extends Floater
     myColor = color(190, 190, 190);
     myCenterX = (int)(Math.random()*501);
     myCenterY = (int)(Math.random()*501);
-    myDirectionX = 0;
-    myDirectionY = 0;
+    myDirectionX = .1;
+    myDirectionY = .1;
     myPointDirection = 0;
-    rotationSpeed = (int)(Math.random()*721) - 360;
+    rotationSpeed = (int)(Math.random()*3) - 1;
   }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
@@ -205,6 +211,10 @@ class Asteroid extends Floater
     public double getDirectionY(){return myDirectionY;}
     public void setPointDirection(int degrees){myPointDirection = degrees;}
     public double getPointDirection(){return myPointDirection;}
+    public void move(){
+      rotate(rotationSpeed);
+      super.move();
+    }
 }
 class Star
 {
