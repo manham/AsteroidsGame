@@ -1,15 +1,18 @@
+int time = 0;
 SpaceShip shuu = new SpaceShip();
 Star[] spacesky = new Star[200];
-Asteroid[] comets = new Asteroid[10];
+ArrayList<Asteroid> comets = new ArrayList<Asteroid>();
 public void setup() 
 {
   size(500,500);
+  frameRate(20);
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i] = new Star();
   }
-  for(int i = 0; i < comets.length; i = i + 1){
-    comets[i] = new Asteroid();
+  for(int i = 0; i < 10; i = i + 1){
+    comets.add(new Asteroid());
   }
+  
 }
 public void draw() 
 { 
@@ -17,12 +20,21 @@ public void draw()
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i].show();
   }
-  for(int i = 0; i < comets.length; i = i + 1){
-    comets[i].show();
-    comets[i].move();
+  for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
+    if(dist(shuu.getX(), shuu.getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 20){
+      comets.remove(nI);
+    }
+  }
+  for(int nI = 0; nI < comets.size(); nI = nI + 1){
+    comets.get(nI).show();
+    comets.get(nI).move();
   }
   shuu.show();
   shuu.move();
+  time = time + 1;
+  if(time % 20 == 0){
+    comets.add(new Asteroid());
+  }
 }
 
 
@@ -44,11 +56,11 @@ public void keyPressed()
     }
     else if(keyCode == LEFT)
     {
-      shuu.rotate(-1);
+      shuu.rotate(-10);
     }
     else if(keyCode == RIGHT)
     {
-      shuu.rotate(1);
+      shuu.rotate(10);
     }
   }
 }
@@ -199,7 +211,7 @@ class Asteroid extends Floater
     myDirectionX = Math.random()*2 - 1;
     myDirectionY = Math.random()*2 - 1;
     myPointDirection = 0;
-    rotationSpeed = (int)(Math.random()*3) - 1;
+    rotationSpeed = (int)(Math.random()*5) - 2;
   }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
@@ -215,6 +227,17 @@ class Asteroid extends Floater
       rotate(rotationSpeed);
       super.move();
     }
+}
+class Bullet extends Floater
+{
+   Bullet(){
+    myColor = color(255, 0, 0);
+    myCenterX = SpaceShip.getX();
+    myCenterY = SpaceShip.getY();
+    myDirectionX = ;
+    myDirectionY = ;
+    myPointDirection = SpaceShip.getPointDirection();
+  }
 }
 class Star
 {
