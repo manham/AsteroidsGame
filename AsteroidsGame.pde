@@ -1,18 +1,20 @@
 int time = 0;
+boolean leRotatingLeft = false;
+boolean leRotatingRight = false;
+boolean leAccelerate = false;
+boolean leShooting = false;
 SpaceShip shuu = new SpaceShip();
 Star[] spacesky = new Star[200];
 ArrayList<Asteroid> comets = new ArrayList<Asteroid>();
+ArrayList<Bullet> nyaa = new ArrayList<Bullet>();
 public void setup() 
 {
-  size(500,500);
-  frameRate(20);
+  size(600,600, P2D);
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i] = new Star();
   }
   for(int i = 0; i < 10; i = i + 1){
-    comets.add(new Asteroid());
-  }
-  
+    comets.add(new Asteroid());}
 }
 public void draw() 
 { 
@@ -20,21 +22,39 @@ public void draw()
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i].show();
   }
-  for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
-    if(dist(shuu.getX(), shuu.getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 20){
-      comets.remove(nI);
-    }
+  for(int nI = 0; nI < nyaa.size(); nI = nI + 1) {
+    nyaa.get(nI).show();
+    nyaa.get(nI).move();
   }
   for(int nI = 0; nI < comets.size(); nI = nI + 1){
     comets.get(nI).show();
     comets.get(nI).move();
   }
+
   shuu.show();
   shuu.move();
+  if(leAccelerate == true){shuu.accelerate(.1);}
+  if(leRotatingLeft == true){shuu.rotate(-5);}
+  if(leRotatingRight == true){shuu.rotate(5);}
+  if(leShooting == true){nyaa.add(new Bullet(shuu));}
   time = time + 1;
-  if(time % 20 == 0){
+    for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
+    for(int nO = nyaa.size() - 1; nO >= 0; nO = nO - 1){
+       if(dist(nyaa.get(nO).getX(), nyaa.get(nO).getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 10){
+       comets.remove(nI);
+        nyaa.remove(nO);
+        break;
+      }
+    }
+  }
+  if(time % 60 == 0){
     comets.add(new Asteroid());
   }
+text("myCenterX: "+ shuu.getX(),10,20);
+  text("myCenterY: "+ shuu.getY(),10,40);
+  text("myPointDirection: "+ shuu.getPointDirection(),10,60);
+  text("myDirectionX: "+ (int)(shuu.getDirectionX()*100)/100.0,10,80);
+  text("myDirectionY: "+ (int)(shuu.getDirectionY()*100)/100.0,10,100);
 }
 
 
@@ -48,21 +68,28 @@ public void keyPressed()
     shuu.setY((int)(Math.random()*501));
     shuu.setPointDirection((int)(Math.random()*361));
   }
-  if(key == CODED)
+  if(key == 'x' || key == 'X')
   {
-    if(keyCode == UP)
-    {
-      shuu.accelerate(1);
-    }
-    else if(keyCode == LEFT)
-    {
-      shuu.rotate(-10);
-    }
-    else if(keyCode == RIGHT)
-    {
-      shuu.rotate(10);
-    }
+    leShooting = true;
   }
+  if(key == 'j' || key == 'J')
+  {
+    leRotatingLeft = true;
+  }
+  if(key == 'k' || key == 'K')
+  {
+    leAccelerate = true;
+  }
+  if(key == 'l' || key == 'L')
+  {
+    leRotatingRight = true;
+  }
+}
+public void keyReleased() {
+  leRotatingRight = false;
+  leRotatingLeft = false;
+  leAccelerate = false;
+  leShooting = false;
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -228,23 +255,13 @@ class Asteroid extends Floater
       super.move();
     }
 }
-class Bullet extends Floater
-{
-   Bullet(){
-    myColor = color(255, 0, 0);
-    myCenterX = SpaceShip.getX();
-    myCenterY = SpaceShip.getY();
-    myDirectionX = ;
-    myDirectionY = ;
-    myPointDirection = SpaceShip.getPointDirection();
-  }
-}
+
 class Star
 {
   private int myX, myY;
   Star(){
-    myX = (int)(Math.random()*501);
-    myY = (int)(Math.random()*501);
+    myX = (int)(Math.random()*601);
+    myY = (int)(Math.random()*601);
   }
   public void show(){
     fill(255, 255, 0);
