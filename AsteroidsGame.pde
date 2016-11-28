@@ -36,7 +36,7 @@ public void draw()
   if(leAccelerate == true){shuu.accelerate(.1);}
   if(leRotatingLeft == true){shuu.rotate(-5);}
   if(leRotatingRight == true){shuu.rotate(5);}
-  if(leShooting == true){nyaa.add(new Bullet(shuu));}
+  //if(leShooting == true){nyaa.add(new Bullet(shuu));}
   time = time + 1;
     for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
     for(int nO = nyaa.size() - 1; nO >= 0; nO = nO - 1){
@@ -50,11 +50,6 @@ public void draw()
   if(time % 60 == 0){
     comets.add(new Asteroid());
   }
-text("myCenterX: "+ shuu.getX(),10,20);
-  text("myCenterY: "+ shuu.getY(),10,40);
-  text("myPointDirection: "+ shuu.getPointDirection(),10,60);
-  text("myDirectionX: "+ (int)(shuu.getDirectionX()*100)/100.0,10,80);
-  text("myDirectionY: "+ (int)(shuu.getDirectionY()*100)/100.0,10,100);
 }
 
 
@@ -70,7 +65,8 @@ public void keyPressed()
   }
   if(key == 'x' || key == 'X')
   {
-    leShooting = true;
+//    leShooting = true;
+    nyaa.add(new Bullet(shuu));
   }
   if(key == 'j' || key == 'J')
   {

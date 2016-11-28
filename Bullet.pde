@@ -7,9 +7,9 @@ class Bullet extends Floater
     myCenterX = theShip.getX();
     myCenterY = theShip.getY();
     myPointDirection = theShip.getPointDirection();
-    dRadians = myPointDirection * (Math.PI/-180);
-    myDirectionX = 5 * Math.cos(dRadians) * theShip.getDirectionX();
-    myDirectionY = 5 * Math.sin(dRadians) * theShip.getDirectionY();
+    dRadians = myPointDirection * (Math.PI/180);
+    myDirectionX = (5 * Math.cos(dRadians)) + theShip.getDirectionX();
+    myDirectionY = (5 * Math.sin(dRadians)) + theShip.getDirectionY();
   }
     public void setX(int x){myCenterX = x;}
     public int getX(){return (int)myCenterX;}
