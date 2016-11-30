@@ -1,4 +1,7 @@
 int time = 0;
+int rawr = 0;
+int lives = 3;
+boolean gameOver = false;
 boolean leRotatingLeft = false;
 boolean leRotatingRight = false;
 boolean leAccelerate = false;
@@ -36,16 +39,29 @@ public void draw()
   if(leAccelerate == true){shuu.accelerate(.1);}
   if(leRotatingLeft == true){shuu.rotate(-5);}
   if(leRotatingRight == true){shuu.rotate(5);}
-  //if(leShooting == true){nyaa.add(new Bullet(shuu));}
+  if(leShooting == true){nyaa.add(new Bullet(shuu));}
   time = time + 1;
-    for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
+  for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
     for(int nO = nyaa.size() - 1; nO >= 0; nO = nO - 1){
-       if(dist(nyaa.get(nO).getX(), nyaa.get(nO).getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 10){
+      if(dist(nyaa.get(nO).getX(), nyaa.get(nO).getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 10){
        comets.remove(nI);
         nyaa.remove(nO);
         break;
       }
     }
+  }
+  for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
+    if(dist(shuu.getX(), shuu.getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 20){
+      comets.remove(nI);
+      lives = lives - 1;
+}
+}
+  if(lives < 1){
+    gameOver = true;
+  }
+  if(gameOver == true){
+    fill(255);
+    rect(0, 0, 600, 600);
   }
   if(time % 60 == 0){
     comets.add(new Asteroid());
@@ -65,8 +81,8 @@ public void keyPressed()
   }
   if(key == 'x' || key == 'X')
   {
-//    leShooting = true;
-    nyaa.add(new Bullet(shuu));
+    if(rawr%2 == 1){leShooting = true;}
+    else{nyaa.add(new Bullet(shuu));}
   }
   if(key == 'j' || key == 'J')
   {
@@ -79,6 +95,10 @@ public void keyPressed()
   if(key == 'l' || key == 'L')
   {
     leRotatingRight = true;
+  }
+  if(key == 'q' || key == 'Q')
+  {
+    rawr = rawr + 1;
   }
 }
 public void keyReleased() {
