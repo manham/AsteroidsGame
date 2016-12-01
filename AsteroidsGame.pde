@@ -71,7 +71,6 @@ public void draw()
   }
   if(gameOver == false){
     text("Lives: "+ lives, 10, 20);
-    text("Time: "+ time/30, 10, 40);
   }
 }
 
