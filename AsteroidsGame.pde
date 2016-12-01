@@ -13,6 +13,7 @@ ArrayList<Bullet> nyaa = new ArrayList<Bullet>();
 public void setup() 
 {
   size(600,600, P2D);
+  frameRate(20);
   for(int i = 0; i < spacesky.length; i = i + 1){
     spacesky[i] = new Star();
   }
