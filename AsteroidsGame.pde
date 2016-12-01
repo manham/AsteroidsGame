@@ -62,9 +62,16 @@ public void draw()
   if(gameOver == true){
     fill(255);
     rect(0, 0, 600, 600);
+    fill(0);
+    text("GAME OVER", 275, 280);
+    text("refresh page to replay", 250, 300);
   }
   if(time % 60 == 0){
     comets.add(new Asteroid());
+  }
+  if(gameOver == false){
+    text("Lives: "+ lives, 10, 20);
+    text("Time: "+ time/30, 10, 40);
   }
 }
 
@@ -248,7 +255,7 @@ class Asteroid extends Floater
     yCorners[9] = -6;
     xCorners[10] = -3;
     yCorners[10] = -6;
-    myColor = color(190, 190, 190);
+    myColor = color(150, 150, 150);
     myCenterX = (int)(Math.random()*501);
     myCenterY = (int)(Math.random()*501);
     myDirectionX = Math.random()*2 - 1;
