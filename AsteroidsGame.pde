@@ -1,7 +1,5 @@
 int time = 0;
 int rawr = 0;
-int lives = 10;
-boolean gameOver = false;
 boolean leRotatingLeft = false;
 boolean leRotatingRight = false;
 boolean leAccelerate = false;
@@ -50,27 +48,8 @@ public void draw()
       }
     }
   }
-  for(int nI = comets.size() - 1; nI >= 0; nI = nI - 1){
-    if(dist(shuu.getX(), shuu.getY(), comets.get(nI).getX(), comets.get(nI).getY()) < 20){
-      comets.remove(nI);
-      lives = lives - 1;
-}
-}
-  if(lives < 1){
-    gameOver = true;
-  }
-  if(gameOver == true){
-    fill(255);
-    rect(0, 0, 600, 600);
-    fill(0);
-    text("GAME OVER", 275, 280);
-    text("refresh page to replay", 250, 300);
-  }
   if(time % 60 == 0){
     comets.add(new Asteroid());
-  }
-  if(gameOver == false){
-    text("Lives: "+ lives, 10, 20);
   }
 }
 
