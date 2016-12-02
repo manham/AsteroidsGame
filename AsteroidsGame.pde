@@ -1,5 +1,4 @@
 int time = 0;
-int rawr = 0;
 boolean leRotatingLeft = false;
 boolean leRotatingRight = false;
 boolean leAccelerate = false;
@@ -66,8 +65,7 @@ public void keyPressed()
   }
   if(key == 'x' || key == 'X')
   {
-    if(rawr%2 == 1){leShooting = true;}
-    else{nyaa.add(new Bullet(shuu));}
+    leShooting = true;
   }
   if(key == 'j' || key == 'J')
   {
@@ -80,10 +78,6 @@ public void keyPressed()
   if(key == 'l' || key == 'L')
   {
     leRotatingRight = true;
-  }
-  if(key == 'q' || key == 'Q')
-  {
-    rawr = rawr + 1;
   }
 }
 public void keyReleased() {
